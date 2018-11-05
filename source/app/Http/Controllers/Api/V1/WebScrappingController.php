@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Http\Controllers\ApiController;
 use App\Services\ScrappyService;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
-class WebScrappingController extends Controller
+
+class WebScrappingController extends ApiController
 {
 
     private $scrappyService;
@@ -22,6 +23,7 @@ class WebScrappingController extends Controller
         try {
 
             $this->scrappyService->getPageDom();
+
         } catch (\Exception $exception) {
             die($exception->getMessage());
         }
