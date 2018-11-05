@@ -21,11 +21,16 @@ class WebScrappingController extends ApiController
     public function simpleTask()
     {
         try {
-
-            $this->scrappyService->getPageDom();
-
+            $data = [];
+            $pages = $this->scrappyService->getPageDomLinks();
+            foreach ($pages as $index => $page) {
+                $data[$page->getPageNumber()]['pageNum'] = $page->getPageNumber();
+                $data[$page->getPageNumber()]['pageLinks'] = $page->getPageLinks();
+            }
+            return $this->setStatusCode(200)
+                ->respond($data);
         } catch (\Exception $exception) {
-            die($exception->getMessage());
+            $this->respondValidationErrors($exception->getMessage());
         }
 
     }
