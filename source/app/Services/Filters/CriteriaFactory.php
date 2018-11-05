@@ -25,6 +25,9 @@ Abstract class CriteriaFactory implements IFactory
             case 'advanced':
                 return new AdvancedCriteria();
                 break;
+            case 'pagination':
+                return new PaginationCriteria();
+                break;
             default:
                 return new SimpleCriteria();
                 break;

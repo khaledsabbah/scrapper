@@ -19,21 +19,40 @@ use App\Transformers\PageTransformer;
 class ScrappyService
 {
 
-    private $simpleTaskUrls = "https://www.homegate.ch/mieten/immobilien/kanton-zuerich/trefferliste?ep=1";
+    private $simpleTaskUrls = "https://www.homegate.ch/mieten/immobilien/kanton-zuerich/trefferliste?ep=";
     private $advancedTaskUrls = ["https://www.newhome.ch/de/kaufen/immobilien/haus/bauernhaus/ort_effretikon/5.0_zimmer/detail.aspx?pc=new& id=N875 &liste=1"];
 
-    public function getPageDomLinks() : array
+    public function getPageDomLinks(): array
     {
-        try {
-            $pageDome = CurlRequest::curlGetRequest($this->simpleTaskUrls, 'GET');
+        $pageNum = 1;
+        $totalPages = [];
+        while ($pageNum < 3) {
+            $pageDome = CurlRequest::curlGetRequest($this->simpleTaskUrls . $pageNum, 'GET');
             $links = CriteriaFactory::make('simple')->meetCriteria(PageDomXPath::getXpathObj($pageDome)->query('//a'));
-            return [PageTransformer::transform($pageNum=1,$links)];
-
-
-        } catch (WebsiteNotFoundException $websiteNotFoundException) {
-            // Pages limit Logic
-            die($websiteNotFoundException->getMessage());
+            $totalPages[] = PageTransformer::transform($pageNum, $links);
+            $pageNum++;
         }
+        return $totalPages;
+
+    }
+
+    public function getTotalPagesNumber() :int
+    {
+        $lastPageNum = 0;
+        $pageNum = 1;
+        while ($pageNum > 0) {
+            $pageDome = CurlRequest::curlGetRequest($this->simpleTaskUrls . $pageNum, 'GET');
+            $paginationCriteria = CriteriaFactory::make('pagination');
+            $xPathObj = PageDomXPath::getXpathObj($pageDome);
+            $paginations = $paginationCriteria->meetCriteria($xPathObj->query("(//li[@class='next'])"));
+            if (empty($paginations)) {
+                $lastPageNum = $paginationCriteria->getLastPaginationNum($xPathObj->query("(//li[@class='page-link'])[last()]"));
+                $pageNum = -5;
+            }else{
+                $pageNum += 15;
+            }
+        }
+        return $lastPageNum;
 
     }
 

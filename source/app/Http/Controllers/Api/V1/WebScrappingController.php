@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\ApiController;
 use App\Services\ScrappyService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 
@@ -18,20 +19,23 @@ class WebScrappingController extends ApiController
         $this->scrappyService = $scrappyService;
     }
 
-    public function simpleTask()
+    public function simpleTask() :JsonResponse
     {
+        $data = [];
         try {
-            $data = [];
+            $data['lastPaginationNumber']= $this->scrappyService->getTotalPagesNumber();
             $pages = $this->scrappyService->getPageDomLinks();
             foreach ($pages as $index => $page) {
-                $data[$page->getPageNumber()]['pageNum'] = $page->getPageNumber();
-                $data[$page->getPageNumber()]['pageLinks'] = $page->getPageLinks();
+                $data["pages"][$page->getPageNumber()]['pageNum'] = $page->getPageNumber();
+                $data["pages"][$page->getPageNumber()]['pageLinks'] = $page->getPageLinks();
             }
-            return $this->setStatusCode(200)
-                ->respond($data);
+        } catch (WebsiteNotFoundException $websiteNotFoundException) {
+            return $this->respondValidationErrors($websiteNotFoundException->getMessage());
         } catch (\Exception $exception) {
-            $this->respondValidationErrors($exception->getMessage());
+            return $this->respondValidationErrors($exception->getMessage());
         }
+        return $this->setStatusCode(200)
+            ->respond($data);
 
     }
 
