@@ -16,12 +16,26 @@ use App\Libs\PageDomXPath;
 use App\Services\Filters\CriteriaFactory;
 use App\Transformers\PageTransformer;
 
+/**
+ * Class ScrappyService
+ * @package App\Services
+ */
 class ScrappyService
 {
 
+    /**
+     * @var string
+     */
     private $simpleTaskUrls = "https://www.homegate.ch/mieten/immobilien/kanton-zuerich/trefferliste?ep=";
+    /**
+     * @var array
+     */
     private $advancedTaskUrls = ["https://www.newhome.ch/de/kaufen/immobilien/haus/bauernhaus/ort_effretikon/5.0_zimmer/detail.aspx?pc=new& id=N875 &liste=1"];
 
+    /**
+     * @return array
+     * @throws WebsiteNotFoundException
+     */
     public function getPageDomLinks(): array
     {
         $pageNum = 1;
@@ -36,6 +50,10 @@ class ScrappyService
 
     }
 
+    /**
+     * @return int
+     * @throws WebsiteNotFoundException
+     */
     public function getTotalPagesNumber() :int
     {
         $lastPageNum = 0;

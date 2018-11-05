@@ -9,7 +9,15 @@
 namespace App\Contracts;
 
 
+/**
+ * Interface IFactory
+ * @package App\Contracts
+ */
 interface IFactory
 {
+    /**
+     * @param string $criteriaType
+     * @return ICriteria
+     */
     public static function make(string $criteriaType) :ICriteria;
 }

@@ -12,9 +12,17 @@ namespace App\Services\Filters;
 use App\Contracts\ICriteria;
 use App\Contracts\IFactory;
 
+/**
+ * Class CriteriaFactory
+ * @package App\Services\Filters
+ */
 Abstract class CriteriaFactory implements IFactory
 {
 
+    /**
+     * @param string $criteriaType
+     * @return ICriteria
+     */
     public static function make(string $criteriaType): ICriteria
     {
         // TODO: Implement make() method.

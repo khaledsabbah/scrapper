@@ -12,8 +12,17 @@ namespace App\Transformers;
 use App\Contracts\Itransform;
 use App\Entities\Page;
 
+/**
+ * Class PageTransformer
+ * @package App\Transformers
+ */
 abstract class PageTransformer implements Itransform
 {
+    /**
+     * @param int $pageNum
+     * @param array $pageLinks
+     * @return Page
+     */
     public static function transform(int $pageNum, array $pageLinks): Page
     {
         $page = new Page();

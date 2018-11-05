@@ -9,7 +9,15 @@
 namespace App\Contracts;
 
 
+/**
+ * Interface ICriteria
+ * @package App\Contracts
+ */
 interface ICriteria
 {
+    /**
+     * @param \DOMNodeList $domNodeList
+     * @return array
+     */
     public function meetCriteria(\DOMNodeList $domNodeList) :array ;
 }

@@ -11,14 +11,26 @@ namespace App\Services\Filters;
 
 use App\Contracts\ICriteria;
 
+/**
+ * Class PaginationCriteria
+ * @package App\Services\Filters
+ */
 class PaginationCriteria implements ICriteria
 {
 
+    /**
+     * @param \DOMNodeList $domNodeList
+     * @return array
+     */
     public function meetCriteria(\DOMNodeList $domNodeList): array
     {
         return $domNodeList->length >= 1 ? [$domNodeList->item(0)] : [];
     }
 
+    /**
+     * @param \DOMNodeList $domNodeList
+     * @return int
+     */
     public function getLastPaginationNum(\DOMNodeList $domNodeList): int
     {
         $links = [];
