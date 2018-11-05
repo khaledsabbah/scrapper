@@ -9,7 +9,25 @@
 namespace App\Services\Filters;
 
 
-class CriteriaFactory
+use App\Contracts\ICriteria;
+use App\Contracts\IFactory;
+
+Abstract class CriteriaFactory implements IFactory
 {
 
+    public static function make(string $criteriaType): ICriteria
+    {
+        // TODO: Implement make() method.
+        switch ($criteriaType) {
+            case 'simple':
+                return new SimpleCriteria();
+                break;
+            case 'advanced':
+                return new AdvancedCriteria();
+                break;
+            default:
+                return new SimpleCriteria();
+                break;
+        }
+    }
 }

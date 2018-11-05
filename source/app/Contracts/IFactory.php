@@ -3,13 +3,13 @@
  * Created by PhpStorm.
  * User: khaledgamal
  * Date: 11/5/18
- * Time: 4:43 PM
+ * Time: 8:09 PM
  */
 
 namespace App\Contracts;
 
 
-interface ICriteria
+interface IFactory
 {
-    public function meetCriteria(\DOMNodeList $domNodeList) :array ;
+    public static function make(string $criteriaType) :ICriteria;
 }

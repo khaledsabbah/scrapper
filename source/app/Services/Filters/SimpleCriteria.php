@@ -20,9 +20,21 @@ use App\Contracts\ICriteria;
 class SimpleCriteria  implements  ICriteria
 {
 
-    public function meetCriteria()
+    /**
+     * @param \DOMNodeList $domNodeList
+     * @return array
+     */
+    public function meetCriteria(\DOMNodeList  $domNodeList) :array
     {
-        // TODO: Implement meetCriteria() method.
+        $links= [];
+        for ($i = $domNodeList->length; --$i >= 0; ) {
+            $href = $domNodeList->item($i)->getAttribute('href');
+            $hrefContents= explode('/', $href);
+            if(is_numeric(end($hrefContents))){
+                $links[]=$href;
+            }
+        }
+        return $links;
     }
 
 }
