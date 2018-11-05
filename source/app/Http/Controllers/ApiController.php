@@ -86,7 +86,9 @@ class ApiController extends Controller {
     {
         if (is_array($errors)) {
             return $this->setStatusCode(422)->respond($errors);
-        } else {
+        }elseif (is_string($errors)){
+            return $this->setStatusCode(422)->respond(["errors"=>$errors]);
+        }else {
             return $this->setStatusCode(422)->respond($errors->toArray());
         }
     }
