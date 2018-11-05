@@ -1,0 +1,26 @@
+version: '2'
+
+services:
+
+  web:
+    image: nginx:latest
+    ports:
+        - 8089:80
+    volumes:
+        - ../source/:/var/www/html
+        - ./microServices/nginx/config/default.conf:/etc/nginx/conf.d/default.conf
+    links:
+        - php
+    networks:
+      - app-network
+
+  php:
+    image: mikechernev/php7-fpm-laravel
+    volumes:
+        - ../source/:/var/www/html
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: "bridge"
