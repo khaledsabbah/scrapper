@@ -32,16 +32,18 @@ class ScrappyService
      */
     private $advancedTaskUrls = ["https://www.newhome.ch/de/kaufen/immobilien/haus/bauernhaus/ort_effretikon/5.0_zimmer/detail.aspx?pc=new& id=N875 &liste=1"];
 
+
     /**
+     * @param string $url
      * @return array
      * @throws WebsiteNotFoundException
      */
-    public function getPageDomLinks(): array
+    public function getPageDomLinks(string $url = null): array
     {
         $pageNum = 1;
         $totalPages = [];
         while ($pageNum < 3) {
-            $pageDome = CurlRequest::curlGetRequest($this->simpleTaskUrls . $pageNum, 'GET');
+            $pageDome = CurlRequest::curlGetRequest($url ?? $this->simpleTaskUrls . $pageNum, 'GET');
             $links = CriteriaFactory::make('simple')->meetCriteria(PageDomXPath::getXpathObj($pageDome)->query('//a'));
             $totalPages[] = PageTransformer::transform($pageNum, $links);
             $pageNum++;
@@ -50,23 +52,25 @@ class ScrappyService
 
     }
 
+
     /**
+     * @param string $url
      * @return int
      * @throws WebsiteNotFoundException
      */
-    public function getTotalPagesNumber() :int
+    public function getTotalPagesNumber(string $url = null): int
     {
         $lastPageNum = 0;
         $pageNum = 1;
         while ($pageNum > 0) {
-            $pageDome = CurlRequest::curlGetRequest($this->simpleTaskUrls . $pageNum, 'GET');
+            $pageDome = CurlRequest::curlGetRequest($url ?? $this->simpleTaskUrls . $pageNum, 'GET');
             $paginationCriteria = CriteriaFactory::make('pagination');
             $xPathObj = PageDomXPath::getXpathObj($pageDome);
             $paginations = $paginationCriteria->meetCriteria($xPathObj->query("(//li[@class='next'])"));
             if (empty($paginations)) {
                 $lastPageNum = $paginationCriteria->getLastPaginationNum($xPathObj->query("(//li[@class='page-link'])[last()]"));
                 $pageNum = -5;
-            }else{
+            } else {
                 $pageNum += 15;
             }
         }

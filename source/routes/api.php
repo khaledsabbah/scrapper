@@ -15,5 +15,5 @@ use Illuminate\Http\Request;
 
 Route::prefix('v1')->group(function () {
     Route::get('/simpleTask', 'Api\V1\WebScrappingController@simpleTask');
-    Route::get('/advnacedTask', 'Api\V1\CourierController@advancedTask');
+//    Route::get('/advnacedTask', 'Api\V1\CourierController@advancedTask');
 });
