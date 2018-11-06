@@ -1,0 +1,105 @@
+PHPUnit 7.4.3 by Sebastian Bergmann and contributors.
+
+..                                                                  2 / 2 (100%)array(2) {
+  [0]=>
+  object(App\Entities\Page)#54 (2) {
+    ["pageNumber":"App\Entities\Page":private]=>
+    int(1)
+    ["pageLinks":"App\Entities\Page":private]=>
+    array(20) {
+      [0]=>
+      string(17) "/mieten/109292075"
+      [1]=>
+      string(17) "/mieten/109292918"
+      [2]=>
+      string(17) "/mieten/109323437"
+      [3]=>
+      string(17) "/mieten/108081542"
+      [4]=>
+      string(17) "/mieten/109321000"
+      [5]=>
+      string(18) "/mieten/2147503148"
+      [6]=>
+      string(17) "/mieten/109299989"
+      [7]=>
+      string(17) "/mieten/109297678"
+      [8]=>
+      string(17) "/mieten/109327974"
+      [9]=>
+      string(17) "/mieten/109118630"
+      [10]=>
+      string(17) "/mieten/109299994"
+      [11]=>
+      string(17) "/mieten/108847624"
+      [12]=>
+      string(17) "/mieten/109153291"
+      [13]=>
+      string(17) "/mieten/109123638"
+      [14]=>
+      string(17) "/mieten/109181293"
+      [15]=>
+      string(17) "/mieten/109198763"
+      [16]=>
+      string(17) "/mieten/107790701"
+      [17]=>
+      string(17) "/mieten/107790702"
+      [18]=>
+      string(17) "/mieten/107790705"
+      [19]=>
+      string(17) "/mieten/109314338"
+    }
+  }
+  [1]=>
+  object(App\Entities\Page)#217 (2) {
+    ["pageNumber":"App\Entities\Page":private]=>
+    int(2)
+    ["pageLinks":"App\Entities\Page":private]=>
+    array(20) {
+      [0]=>
+      string(17) "/mieten/109192804"
+      [1]=>
+      string(17) "/mieten/109046910"
+      [2]=>
+      string(17) "/mieten/108662322"
+      [3]=>
+      string(17) "/mieten/108084828"
+      [4]=>
+      string(17) "/mieten/109283028"
+      [5]=>
+      string(17) "/mieten/109283029"
+      [6]=>
+      string(17) "/mieten/109283030"
+      [7]=>
+      string(17) "/mieten/109048318"
+      [8]=>
+      string(17) "/mieten/108597632"
+      [9]=>
+      string(17) "/mieten/108240527"
+      [10]=>
+      string(17) "/mieten/108947386"
+      [11]=>
+      string(17) "/mieten/108724297"
+      [12]=>
+      string(17) "/mieten/109292953"
+      [13]=>
+      string(17) "/mieten/109126711"
+      [14]=>
+      string(17) "/mieten/109297282"
+      [15]=>
+      string(17) "/mieten/108873038"
+      [16]=>
+      string(17) "/mieten/108873047"
+      [17]=>
+      string(17) "/mieten/108953636"
+      [18]=>
+      string(17) "/mieten/109293031"
+      [19]=>
+      string(17) "/mieten/109292915"
+    }
+  }
+}
+
+
+Time: 3.71 seconds, Memory: 6.00MB
+
+OK (2 tests, 8 assertions)

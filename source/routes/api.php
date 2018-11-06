@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::prefix('v1')->group(function () {
+    Route::get('/simpleTask', 'Api\V1\WebScrappingController@simpleTask');
+//    Route::get('/advnacedTask', 'Api\V1\CourierController@advancedTask');
 });
