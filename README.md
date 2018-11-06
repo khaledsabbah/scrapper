@@ -28,6 +28,7 @@
         - `./install.sh`
         - `php artisan key:generate`
         - `php artisan config:cache`
+        - `chmod 777 -R /var/www/html/storage/framework/`
         
 # Running
 - server url :   `http://localhost:8089`
