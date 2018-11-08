@@ -16,6 +16,18 @@ class AdvancedCriteria implements ICriteria
 
     public function meetCriteria(\DOMNodeList $domNodeList): array
     {
-        // TODO: Implement meetCriteria() method.
+        dd($domNodeList);
+        $links= [];
+        for ($i = $domNodeList->length; --$i >= 0; ) {
+            $href = $domNodeList->item($i)->getAttribute('href');
+            $hrefContents= array_filter(explode('&', $href), function($linkPart){
+                return strpos(strtolower($linkPart),'id=')==0;
+            });
+            if(!empty($hrefContents)){
+                $links[]=$href;
+            }
+        }
+        dd($links);
+        return $links;
     }
 }
